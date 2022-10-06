@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="mnsg.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alkalami&display=swap" rel="stylesheet">
+    <title>Codificar e Decodificar</title>
+</head>
+<body>
+
+<main>
+<div class="conatiner">
+    <!-- título -->
+    <h1>Codifique & Decodifique</h1>
+    <h2>_base64 _cifra de césar</h2>
+    <!-- enviar mensagem para ser codificada ou decodificada -->
+<form action="#">
+    <textarea name="mensagem" id="mensagem" placeholder="Digite sua mensagem..." cols="50" rows="5"></textarea>
+    <!-- selecionar tipo de codificação ou decodificação -->
+    <label id="selecione" for="select"></label>
+    <select name="select" class="select" id="select">
+    <option value="selecione" disabled selected>Selecione</option>
+    <option value="cifraDeCésar">Cifra de césar</option>
+    <option value="base64">Base64</option>
+    </select>
+    <!-- selecionar chave, determinando valor min e max -->
+<div class="chave-container">
+    <label class="chave" for="range">Escolha uma chave</label>
+    <div class="slider-range">
+    <input type="range" value="1" min="1" max="26" class="range" id="range" oninput="rangenumber.value=value" />
+    <input type="number" value="1" id="rangenumber" min="1" max="26" oninput="range.value=value" />
+</div>
+</div>   
+    <!-- opção para codificar -->
+<div class="radio-button">
+    <div class="radio">
+        <input type="radio" name="codificar" id="codificar" value="codificar" checked />
+        <label for="codificar">Codificar!</label>
+    <!-- opção para decodificar, name="codificar" pois se for decodificar a opção não vai sair de codificar, vai ficar como duas opções e queremos apenas uma -->
+</div>
+    <div class="radio">
+    <input type="radio" name="codificar" id="decodificar" value="decodificar" />
+    <label for="decodificar">Decodificar!</label>
+</div> 
+</div>
+    <!-- criando caixa de resultado e butão para codificar sua mensagem -->
+<textarea id="resultado" class="mensagem resultado" cols="50" rows="4" readonly placeholder="Mensagem Criptografada"></textarea>
+<div class="btn">
+    <button>Codificar mensagem!</button>
+</div>
+</form>
+</div>
+</main> 
+
+<script src="mnsg.js"></script>
+
+</body>
+</html>
