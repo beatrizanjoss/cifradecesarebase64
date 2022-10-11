@@ -7,16 +7,19 @@ var decodificar = document.querySelector ("#decodificar")
 var radiobtn = document.querySelector (".radio-button")
 var alfabeto = "abcdefghijklmnopqrstuvwxyz"
 var rangenumber = document.getElementById ("rangenumber")
-var mensagem = document.getElementById ("mensagem")
+var sms = document.getElementById ("mensagem")
+var saida = document.querySelector ("#resultado")
 
 // fazendo com que quando selecionar opções seja clicada, que a função aconteça: se cifra de césar for selecionada, então apareça a opção de escolher a chave, se não, caso base64 seja selecionada, então suma a opção de escolher a chave!
 selecione.addEventListener ("click", function () {
-   if (selecione.value == "cifraDeCésar") {
+   if (selecione.value == "cifra") {
     selectchave.style.display = "block";
    } else {
     selectchave.style.display = "none";
    }
 });
+
+
 
 // base64
 
@@ -27,50 +30,52 @@ function base64 () {
       return codificado;
    } else if (decodificar.checked) {
      var decodificado = atob(mensagem);
-     return decodifcado;
+     return decodificado;
    }
 }
 
-// cifra de césar
+// cifra de césar para codificar
 
-function cifraDeCésar() {
-   var elemento = mensagem.value;
+function codcifra() {
+   var elemento = sms.value;
    var minuscula = elemento.toLowerCase();
-   var transformarNumero = (Number(rangenumber.value) % 26);
-   var mensagemCodificada = " ";
+   var transforme = (Number(rangenumber.value) % 26);
+   var smscodificada = " ";
 
    for(var i = 0; i < minuscula.length; i++) {
       for(var j = 0; j < alfabeto.length; j++) {
          if(minuscula[i] == alfabeto[j]){
-            mensagemCodificada += alfabeto [j + transformarNumero]
+            smscodificada += alfabeto [j + transforme]
             break;
          } else if (minuscula[i] == " ") {
-            mensagemCodificada += " ";
+            smscodificada += " ";
             break;
          }
       }
    }
-   return mensagemCodificada
+   return smscodificada
 }
 
-function cifraDeCésar() {
-   var elemento = mensagem.value;
+// função cifra de césar para decodificar
+
+function deccifra() {
+   var elemento = sms.value;
    var minuscula = elemento.toLowerCase();
-   var transformarNumero = (Number(rangenumber.value) % 26);
-   var mensagemCodificada = " ";
+   var transforme = (Number(rangenumber.value) % 26);
+   var smsdecodificada = " ";
 
    for(var i = 0; i < minuscula.length; i++) {
-      for(var j = alfabeto.length -1; j >= 0; j--) {
+      for(var j = alfabeto.length - 1; j >= 0; j--) {
          if(minuscula[i] == alfabeto[j]){
-            mensagemCodificada += alfabeto [j - transformarNumero]
+            smsdecodificada += alfabeto [j - transforme]
             break;
-         } else if (minuscula[i] == "") {
-            mensagemCodificada += " ";
+         } else if (minuscula[i] == " ") {
+            smsdecodificada += " ";
             break
          }
       }
    }
-   return mensagemCodificada
+   return smsdecodificada
 }
 
 // mudando a descrição do botão conforme opções "codificar e decodificar" seja selecionada
@@ -87,9 +92,13 @@ radiobtn.addEventListener ("click", function (event) {
 
 btn.addEventListener ("click", function (event) {
    event.preventDefault();
-   if (selecione.value === "base64") {
-      resultado.innerText = base64();
-   } else if (selecione.value === "cifraDeCésar") {
-      resultado.innerText = cifraDeCésar();
-   } 
+   if (codificar.checked && select.value === "base64") {
+      saida.innerText = base64();
+   } else if (decodificar.checked && select.value === "base64") {
+         saida.innerText = base64();
+   } else if (codificar.checked && select.value === "cifra") {
+      saida.innerText = codcifra();
+   } else if (decodificar.checked && select.value === "cifra") {
+      saida.innerText = deccifra();
+   }
 })
